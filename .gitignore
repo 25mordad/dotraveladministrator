@@ -1,0 +1,10 @@
+/yarn.lock
+/package-lock.json
+bash.sh
+/node_modules
+/android/local.properties
+/android/.gradle
+/android/build
+/android/gradle
+/android/keystores
+/android/build.gradle
