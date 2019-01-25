@@ -9,3 +9,4 @@ bash.sh
 /android/keystores
 /android/build.gradle
 /build
+/build/*
