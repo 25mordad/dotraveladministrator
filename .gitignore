@@ -8,3 +8,4 @@ bash.sh
 /android/gradle
 /android/keystores
 /android/build.gradle
+/build
