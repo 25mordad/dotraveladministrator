@@ -12,7 +12,7 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
 
-dependencies: 
+dependencies:  
   mvc_pattern: ^2.0.2
   barcode_scan: ^0.0.3
   google_sign_in: 3.2.4
