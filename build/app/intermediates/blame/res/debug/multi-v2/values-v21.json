@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/mateomartinezmiranda/AndroidStudioProjects/administrator_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-v21/values-v21.xml",
+            "outputFile": "/Users/mateomartinezmiranda/Documents/projects/dotraveladministrator/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-v21/values-v21.xml",
             "map": [
                 {
                     "source": "/Users/mateomartinezmiranda/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/552b968b84065e4e5f7a6c2e080848b3/res/values-v21/values-v21.xml",

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/mateomartinezmiranda/AndroidStudioProjects/administrator_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "/Users/mateomartinezmiranda/Documents/projects/dotraveladministrator/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
                     "source": "/Users/mateomartinezmiranda/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/cb1c42d3754d2970eaf45f41d86b7384/res/values-watch-v20/values.xml",
