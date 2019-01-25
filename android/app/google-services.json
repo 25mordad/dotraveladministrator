@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "686614581608",
+    "firebase_url": "https://administrator-app-ae825.firebaseio.com",
+    "project_id": "administrator-app-ae825",
+    "storage_bucket": "administrator-app-ae825.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686614581608:android:725d2caacf35a0d8",
+        "android_client_info": {
+          "package_name": "com.dotravel.administratorapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "686614581608-tchs3naqtoeo8c222a588tm6c204og0l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dotravel.administratorapp",
+            "certificate_hash": "5883432fb5b0e0575a7c89381189774b162d6532"
+          }
+        },
+        {
+          "client_id": "686614581608-1a4n1ajb50lkm344ek8n44bi9di7aecg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwZlYuFc7vM55IjDwY5xtk64bA5B2SP3E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "686614581608-1a4n1ajb50lkm344ek8n44bi9di7aecg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
