@@ -10,4 +10,4 @@ bash.sh
 /android/build.gradle
 /build
 /build/*
-/.idea
+/.idea 
