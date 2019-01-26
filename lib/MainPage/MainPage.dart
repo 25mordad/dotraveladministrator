@@ -2,6 +2,7 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'Controller/MainPageController.dart';
 
+/// Class for view MainPage
 class MainPage extends StatefulWidget {
   MainPage({Key key, this.title, this.email}) : super(key: key);
 
@@ -26,18 +27,13 @@ class MainPageState extends StateMVC {
   final String email;
   MainPageController _con;
 
+  ///Constructor to set up the controller, the  title and keep the email from the login Page
   MainPageState(this.title, this.email) : super(MainPageController()) {
     this._con = MainPageController();
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(title: Text(title)),
       body: Center(

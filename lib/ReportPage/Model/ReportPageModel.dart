@@ -6,15 +6,18 @@ import 'dart:io';
 import 'package:administrator_app/utils/Util.dart';
 import 'Util/RequestReports.dart';
 
+///Model For Report Page
 class ReportPageModel {
   RequestReports request;
 
+  ///Method for settle the reports requests
   ReportPageModel() {
     if (request == null) {
       request = new RequestReports();
     }
   }
 
+  ///Method to Get the info for the reports  and return back to view the result
   Future<List<Report>> getInfo(String email) async {
     var response = await request.getReports(email);
     var contentBody = json.decode(response.body);

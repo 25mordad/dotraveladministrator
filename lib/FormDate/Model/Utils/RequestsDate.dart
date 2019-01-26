@@ -5,8 +5,12 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:administrator_app/utils/Util.dart';
 
+/**
+ * Class to make the request information for dates
+ */
 class RequestsDate {
-   Future<http.Response> postDateRequest(
+  ///Post dates into the server
+  Future<http.Response> postDateRequest(
       String email, String dateStart, String dateEnd) async {
     Map<String, dynamic> jsonMap = {
       "email": email,
@@ -18,7 +22,7 @@ class RequestsDate {
     String formBody = paramName + '=' + Uri.encodeQueryComponent(jsonString);
     List<int> bodyBytes = utf8.encode(formBody); // utf8 encode
     return await http.post(
-      Util.server + "/services/checkin",
+      Util.serverIP + "/services/checkin",
       headers: {
         HttpHeaders.contentTypeHeader: 'application/x-www-form-urlencoded',
       },

@@ -4,10 +4,12 @@ import 'dart:io';
 import 'package:administrator_app/utils/Util.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 
+///class to make request related to scanner
 class RequestScanner {
-  String url = Util.server + '/services/checklogin';
+  String url = Util.serverIP + '/services/checklogin';
 
-  Future<http.Response> postIntoServices(String code) async {
+  ///check into  server  the scanner login
+  Future<http.Response> postCheckScannerLogin(String code) async {
     Map<String, dynamic> jsonMap = {'code': code};
     String jsonString = json.encode(jsonMap); // encode map to json
     String paramName = 'code'; // give the post param a name
@@ -21,6 +23,4 @@ class RequestScanner {
       body: bodyBytes,
     );
   }
-
-
 }

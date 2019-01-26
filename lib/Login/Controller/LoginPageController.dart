@@ -7,15 +7,20 @@ import '../Model/LoginPageModel.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 
-class LoginController extends ControllerMVC {
+/**
+ * Controller for login Page
+ */
+class LoginPageController extends ControllerMVC {
   static LoginPageModel model;
 
-  LoginController() {
+  //set up the model
+  LoginPageController() {
     if (model == null) {
       model = new LoginPageModel();
     }
   }
 
+  ///call the scan method
   Future<String> scan() async {
     //show error message and hide loading
     bool scan = await submitScan();
@@ -28,7 +33,9 @@ class LoginController extends ControllerMVC {
     return message;
   }
 
-  Future<String> googleLogin(BuildContext context ,GlobalKey<ScaffoldState> _scaffoldKey) async {
+  ///method to make the google login into the server
+  Future<String> googleLogin(
+      BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey) async {
     var result = "";
     Map<String, dynamic> isSign = await handleSignIn();
     if (isSign["status"] == "ok") {
@@ -40,6 +47,7 @@ class LoginController extends ControllerMVC {
     return result;
   }
 
+  ///method to check the google sign in and then make sure this user exist in dotravel
   Future<Map<String, dynamic>> handleSignIn() async {
     bool response = false;
     Map<String, dynamic> result = new Map();
@@ -57,6 +65,7 @@ class LoginController extends ControllerMVC {
     return result;
   }
 
+  // method to submit to call the scan function and then connect to the server
   Future<bool> submitScan() async {
     bool result = false;
     try {

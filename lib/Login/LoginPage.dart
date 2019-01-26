@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'Controller/LoginPageController.dart';
 
+///Class for Login Page View
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
   final String title;
@@ -15,11 +16,12 @@ class LoginPage extends StatefulWidget {
 final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
 class LoginPageState extends StateMVC {
-  LoginController _con;
+  LoginPageController _con;
   String title;
 
-  LoginPageState(this.title) : super(LoginController()) {
-    this._con = LoginController();
+  //set up the controller and the title of the page
+  LoginPageState(this.title) : super(LoginPageController()) {
+    this._con = LoginPageController();
   }
 
   @override
@@ -38,7 +40,7 @@ class LoginPageState extends StateMVC {
                 elevation: 4.0,
                 splashColor: Colors.lightBlueAccent,
                 onPressed: () {
-                  _con.googleLogin(context,_scaffoldKey);
+                  _con.googleLogin(context, _scaffoldKey);
                 },
               ),
               new RaisedButton(

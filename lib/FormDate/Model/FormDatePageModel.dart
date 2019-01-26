@@ -3,15 +3,20 @@ import 'dart:io';
 
 import 'Utils/RequestsDate.dart';
 
+/**
+ * Model for FormDatePage
+ */
 class FormDatePageModel {
   var request;
 
+  //singleton for requests dates
   FormDatePageModel() {
     if (request == null) {
       request = new RequestsDate();
     }
   }
 
+  ///method to post dates into the server
   Future<bool> postDate(String email, String dateStart, String dateEnd) async {
     var response = await request.postDateRequest(email, dateStart, dateEnd);
     var result = json.decode(response.body);

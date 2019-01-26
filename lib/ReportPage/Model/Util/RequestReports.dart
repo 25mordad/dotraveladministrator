@@ -5,7 +5,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:administrator_app/utils/Util.dart';
 
+///Class to make the reports request
 class RequestReports {
+  ///Method to get the reports from the server
   Future<http.Response> getReports(String email) async {
     Map<String, dynamic> jsonMap = {
       "email": email,
@@ -15,7 +17,7 @@ class RequestReports {
     String formBody = paramName + '=' + Uri.encodeQueryComponent(jsonString);
     List<int> bodyBytes = utf8.encode(formBody); // utf8 encode
     return await http.post(
-      Util.server + "/services/gettiming",
+      Util.serverIP + "/services/gettiming",
       headers: {
         HttpHeaders.contentTypeHeader: 'application/x-www-form-urlencoded',
       },

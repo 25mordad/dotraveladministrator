@@ -6,6 +6,9 @@ import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'Controller/FormDatePageController.dart';
 
+/**
+ * View FormDate
+ */
 class FormDate extends StatefulWidget {
   FormDate({Key key, @required this.title, @required this.email})
       : super(key: key);
@@ -22,6 +25,7 @@ class FormDate extends StatefulWidget {
   final String title;
   final String email;
 
+  //set in  title and email for this page
   @override
   FormDateState createState() => FormDateState(title, email);
 }
@@ -31,16 +35,22 @@ final _formKey = GlobalKey<FormState>();
 class FormDateState extends StateMVC {
   final String email;
   final String title;
+
+  //format the result date you want the calendar to throw
   final dateFormat = DateFormat("yyyy-MM-d h:mma");
+
+  // in case you want a input with only hours this will be the formatter
   final timeFormat = DateFormat("h:mm a");
   DateTime date;
   TimeOfDay time;
   FormDateController _con;
 
+  // Constructor to settle the title and the email and the controller
   FormDateState(this.title, this.email) : super(FormDateController()) {
     this._con = FormDateController();
   }
 
+  ///method to write the view components
   @override
   Widget build(BuildContext context) {
     return Scaffold(

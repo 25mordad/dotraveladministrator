@@ -1,3 +1,4 @@
+///Class to make the format for server response for the reports
 class Report {
   String id;
   String id_adminuser;

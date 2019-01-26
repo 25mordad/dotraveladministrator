@@ -3,17 +3,9 @@ import 'package:administrator_app/ReportPage/Model/Util/Report.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'Controller/ReportPageController.dart';
 
+///Class for ReportPage View
 class ReportPage extends StatefulWidget {
   ReportPage({Key key, this.title, @required this.email}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
   final String email;
@@ -25,6 +17,7 @@ class ReportPage extends StatefulWidget {
 class ReportPageState extends StateMVC {
   ReportPageController _con;
 
+  ///Constructor to set up the title and the email
   ReportPageState(this.title, this.email) : super(ReportPageController()) {
     this._con = ReportPageController();
   }
@@ -33,6 +26,7 @@ class ReportPageState extends StateMVC {
   final String title;
   Future<List<Report>> content;
 
+  ///set the information array before starting the view
   @override
   void initState() {
     content = _con.getInformation(email);
@@ -44,10 +38,13 @@ class ReportPageState extends StateMVC {
       appBar: new AppBar(
         title: new Text(title),
       ),
+      //This widget is gonna wait for the response from the server and  we he reach the place and return back is gonna put all the widget like you format
       body: new FutureBuilder<List<Report>>(
         future: content,
         builder: (context, snapshot) {
+          //if the result of the server has something
           if (snapshot.hasData) {
+            //make the components
             List<Widget> widget = new List();
             widget.add(new Row(
               children: <Widget>[
@@ -65,6 +62,7 @@ class ReportPageState extends StateMVC {
             }
             return new Column(children: widget);
           } else {
+            //if not show text error
             return new Text("Error");
           }
 
