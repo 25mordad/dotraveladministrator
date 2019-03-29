@@ -44,6 +44,8 @@ class LoginPageController extends ControllerMVC {
     } else {
       Util.showSnackBar(_scaffoldKey, "Error with google login!");
     }
+
+
     return result;
   }
 

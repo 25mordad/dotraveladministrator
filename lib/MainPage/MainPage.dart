@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'Controller/MainPageController.dart';
@@ -25,11 +27,21 @@ class MainPage extends StatefulWidget {
 class MainPageState extends StateMVC {
   final String title;
   final String email;
+  String _textFromFile;
   MainPageController _con;
 
   ///Constructor to set up the controller, the  title and keep the email from the login Page
   MainPageState(this.title, this.email) : super(MainPageController()) {
+    initState();
+
     this._con = MainPageController();
+    if (this != null) {
+      var timer = Timer.periodic(
+          Duration(seconds: 1),
+          (Timer t) => _con.getCounter().then((val) => setState(() {
+                _textFromFile = val;
+              })));
+    }
   }
 
   @override
@@ -46,9 +58,13 @@ class MainPageState extends StateMVC {
               textColor: Colors.white,
               color: Colors.blue,
               onPressed: () {
-                _con.passToFormDate(context, email);
+                if (_con.settedDate) {
+                  _con.closeDay();
+                } else {
+                  _con.passToFormDate(context, email);
+                }
               },
-              child: new Text("Add"),
+              child: new Text(_textFromFile),
             ),
           ]))),
       drawer: Drawer(

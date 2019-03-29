@@ -12,6 +12,8 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 class MainPageController extends ControllerMVC {
   static MainPageController _this;
   static MainPageModel model;
+  bool settedDate = false;
+  String content = "Add";
 
   ///Constructor to set up the model
   MainPageController() {
@@ -26,9 +28,51 @@ class MainPageController extends ControllerMVC {
         context, ReportPage(title: "Main Page", email: email));
   }
 
+  closeDay() async {
+    var dateStart = Util.getContentFromSharedPreferences("dateStart");
+    var dateId = Util.getContentFromSharedPreferences("idDateStart");
+    //edit content
+
+    setState(() {
+      settedDate = false;
+      content =
+          Util.getMinutesBeetweenDates(dateStart, DateTime.now().toString())
+              .toString();
+    });
+
+    Util.removeContentFromSharedPreferences("dateStart");
+    Util.removeContentFromSharedPreferences("idDateStart");
+  }
+
+  Future<String> getCounter() async {
+    var result = "Add";
+    var dateStart = await Util.getStringFromSharedPreferences("dateStart");
+    if (dateStart != null) {
+      var result =
+          Util.getMinutesBeetweenDates(dateStart, DateTime.now().toString())
+              .toString();
+    }
+    return result;
+  }
+
   ///method to pass to form date
-  passToFormDate(BuildContext context, String email) {
+  passToFormDate(BuildContext context, String email) async {
     //start time go to form included times
-    Util.passToOtherScreen(context, FormDate(title: "Form Date", email: email));
+    var resultPageForm = await Util.passToOtherScreen(
+        context, FormDate(title: "Form Date", email: email));
+    if (resultPageForm != null) {
+      if (resultPageForm == "1") {
+        var dateStart = await Util.getStringFromSharedPreferences("dateStart");
+        var result =
+            Util.getMinutesBeetweenDates(dateStart, DateTime.now().toString())
+                .toString();
+        stateView.setState(() {
+          settedDate = true;
+          content = "dd";
+        });
+      } else {
+        //show error
+      }
+    }
   }
 }

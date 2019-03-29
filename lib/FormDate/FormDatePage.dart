@@ -44,10 +44,15 @@ class FormDateState extends StateMVC {
   DateTime date;
   TimeOfDay time;
   FormDateController _con;
+  DateTime _startTime;
 
   // Constructor to settle the title and the email and the controller
   FormDateState(this.title, this.email) : super(FormDateController()) {
     this._con = FormDateController();
+    //get StartTime
+    _con.getStartDate().then((val) => setState(() {
+          _startTime = val;
+        }));
   }
 
   ///method to write the view components
@@ -65,6 +70,7 @@ class FormDateState extends StateMVC {
                 ],
               ),
               DateTimePickerFormField(
+                initialDate: _startTime,
                 onSaved: (result) {
                   _con.saveContentFormInfo("dateStart", result);
                 },
