@@ -29,11 +29,15 @@ class FormDateController extends ControllerMVC {
 
   Future<DateTime> getStartDate() async {
     DateTime result = null;
-    var dateStart = await Util.getStringFromSharedPreferences("dateStart");
-    if (!dateStart.isEmpty) {
-      result = Util.getDateFromDateTimeString(dateStart, true);
-    } else {
-      result = DateTime.now();
+    try {
+      var dateStart = await Util.getStringFromSharedPreferences("dateStart");
+      if (!dateStart.isEmpty) {
+        result = Util.getDateFromDateTimeString(dateStart, true);
+      } else {
+        result = DateTime.now();
+      }
+    } catch (error) {
+      print(error);
     }
     return result;
   }

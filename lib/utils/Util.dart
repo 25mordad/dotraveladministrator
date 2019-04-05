@@ -39,7 +39,7 @@ class Util {
         result = getData;
       }
     } on Exception catch (e) {
-      print(e.toString());
+      //print(e.toString());
     }
     return result;
   }
@@ -83,15 +83,18 @@ class Util {
 
   static dynamic getMinutesBeetweenDates(String dateStart, String dateEnd) {
     var result = null;
-    var date1 = Util.getDateFromDateTimeString(dateStart, true);
-    var date2 = Util.getDateFromDateTimeString(dateEnd, true);
-    if (date1.difference(date2).inHours < 24) {
-      result =
-          date2.difference(date1).inMinutes.toString() +
-          " Minutes has been" +
-          " pass since you started you're day";
-    } else {
-      result = "Date started on " + date1.toString();
+    try {
+      var date1 = Util.getDateFromDateTimeString(dateStart, true);
+      var date2 = Util.getDateFromDateTimeString(dateEnd, true);
+      if (date1.difference(date2).inHours < 24) {
+        result = date2.difference(date1).inMinutes.toString() +
+            " Minutes has been" +
+            " pass since you started you're day";
+      } else {
+        result = "Date started on " + date1.toString();
+      }
+    } catch (error) {
+      print(error);
     }
     return result;
   }

@@ -46,6 +46,7 @@ class MainPageController extends ControllerMVC {
 
   Future<String> getCounter() async {
     var result = "Add";
+
     var dateStart = await Util.getStringFromSharedPreferences("dateStart");
     if (dateStart != null) {
       var result =

@@ -36,11 +36,17 @@ class MainPageState extends StateMVC {
 
     this._con = MainPageController();
     if (this != null) {
-      var timer = Timer.periodic(
-          Duration(seconds: 1),
-          (Timer t) => _con.getCounter().then((val) => setState(() {
-                _textFromFile = val;
-              })));
+      try {
+        var timer = Timer.periodic(
+            Duration(seconds: 1),
+            (Timer t) => _con.getCounter().then((val) => setState(() {
+                  if (val != null) {
+                    _textFromFile = val;
+                  }
+                })));
+      } catch (error) {
+        //print(error);
+      }
     }
   }
 
@@ -64,7 +70,7 @@ class MainPageState extends StateMVC {
                   _con.passToFormDate(context, email);
                 }
               },
-              child: new Text(_textFromFile),
+              child: new Text(_textFromFile == null ? "Add" : _textFromFile),
             ),
           ]))),
       drawer: Drawer(
