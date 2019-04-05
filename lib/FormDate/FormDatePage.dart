@@ -60,6 +60,8 @@ class FormDateState extends StateMVC {
     //if dateStart change variable
     if (this.dateStart == null) {
       settedDate = true;
+    } else {
+      _con.saveContentFormInfo("dateStart", dateStart);
     }
   }
 
