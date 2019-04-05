@@ -19,6 +19,34 @@ class FormDateController extends ControllerMVC {
     }
   }
 
+  bool checkForm(startDate, endDate) {
+    var result = false;
+    if (startDate != null) {
+      if (endDate == null) {
+        //if date is equal to today allow go on if not user needs to fill endDate  ._.
+        var dateStartFormatted =
+            Util.getDateFromDateTimeString(startDate.toString(), false);
+        var dateNowFormatted =
+            Util.getDateFromDateTimeString(DateTime.now().toString(), false);
+        if (startDate.compareTo(DateTime.now()) <= 0 &&
+            dateStartFormatted.compareTo(dateNowFormatted) == 0) {
+          //allowed
+          result = true;
+        }
+      } else if (endDate != null) {
+        //if the date Start is minus or equal to dateEnd
+
+        if (endDate.compareTo(startDate) > 0) {
+          //remove preferences attribute
+          Util.removeContentFromSharedPreferences("dateStart");
+          //allowed
+          result = true;
+        }
+      }
+    }
+    return result;
+  }
+
   ///call model to post the date into the server
   Future<bool> post(email, dateStart, dateEnd) async {
     var result =

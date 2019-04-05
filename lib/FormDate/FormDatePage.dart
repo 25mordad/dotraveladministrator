@@ -10,7 +10,11 @@ import 'Controller/FormDatePageController.dart';
  * View FormDate
  */
 class FormDate extends StatefulWidget {
-  FormDate({Key key, @required this.title, @required this.email})
+  FormDate(
+      {Key key,
+      @required this.title,
+      @required this.email,
+      @optionalTypeArgs this.dateStart})
       : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -24,10 +28,11 @@ class FormDate extends StatefulWidget {
 
   final String title;
   final String email;
+  final DateTime dateStart;
 
   //set in  title and email for this page
   @override
-  FormDateState createState() => FormDateState(title, email);
+  FormDateState createState() => FormDateState(title, email, dateStart);
 }
 
 final _formKey = GlobalKey<FormState>();
@@ -41,18 +46,21 @@ class FormDateState extends StateMVC {
 
   // in case you want a input with only hours this will be the formatter
   final timeFormat = DateFormat("h:mm a");
-  DateTime date;
+  DateTime dateStart;
+  DateTime dateEnd;
+  bool settedDate = false;
+
   TimeOfDay time;
   FormDateController _con;
-  DateTime _startTime;
 
   // Constructor to settle the title and the email and the controller
-  FormDateState(this.title, this.email) : super(FormDateController()) {
+  FormDateState(this.title, this.email, this.dateStart)
+      : super(FormDateController()) {
     this._con = FormDateController();
-    //get StartTime
-    _con.getStartDate().then((val) => setState(() {
-          _startTime = val;
-        }));
+    //if dateStart change variable
+    if (this.dateStart == null) {
+      settedDate = true;
+    }
   }
 
   ///method to write the view components
@@ -62,66 +70,79 @@ class FormDateState extends StateMVC {
         appBar: AppBar(title: Text(title)),
         body: Form(
             key: _formKey,
-            child: new Column(children: <Widget>[
-              new Row(
-                children: <Widget>[
-                  new Padding(
-                      padding: EdgeInsets.all(5), child: new Text("Start Date"))
-                ],
-              ),
-              DateTimePickerFormField(
-                initialDate: _startTime,
-                onSaved: (result) {
-                  _con.saveContentFormInfo("dateStart", result);
-                },
-                format: dateFormat,
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(5), labelText: 'Date'),
-                onChanged: (dt) => setState(() => date = dt),
-              ),
-              new Row(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(5),
-                    child: new Text("End Date"),
-                  )
-                ],
-              ),
-              DateTimePickerFormField(
-                onSaved: (result) {
-                  _con.saveContentFormInfo("dateEnd", result);
-                },
-                format: dateFormat,
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(5), labelText: 'Date'),
-                onChanged: (dt) => setState(() => date = dt),
-              ),
-              new Row(
-                children: <Widget>[
-                  Padding(padding: EdgeInsets.all(5), child: new Text("Notes"))
-                ],
-              ),
-              new Column(
-                children: <Widget>[
-                  new TextFormField(
+            child: Padding(
+                padding: EdgeInsets.all(10),
+                child: new Column(children: <Widget>[
+                  new Row(
+                    children: <Widget>[
+                      new Padding(
+                          padding: EdgeInsets.all(5),
+                          child: new Text("Start Date"))
+                    ],
+                  ),
+                  settedDate
+                      ? DateTimePickerFormField(
+                          initialDate: dateStart,
+                          initialValue: dateStart,
+                          firstDate: DateTime.now(),
+                          onSaved: (result) {
+                            _con.saveContentFormInfo("dateStart", result);
+                          },
+                          format: dateFormat,
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.black, width: 1.0),
+                              ),
+                              contentPadding: EdgeInsets.all(5),
+                              labelText: 'Date'),
+                          onChanged: (dt) => setState(() => dateStart = dt),
+                        )
+                      : new Text(dateStart.toString()),
+                  new Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.all(5),
+                        child: new Text("End Date"),
+                      )
+                    ],
+                  ),
+                  DateTimePickerFormField(
                     onSaved: (result) {
-                      _con.saveContentFormInfo("notes", result);
+                      _con.saveContentFormInfo("dateEnd", result);
                     },
+                    firstDate: DateTime.now(),
+                    format: dateFormat,
                     decoration: InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.all(5)),
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: RaisedButton(
-                  onPressed: () {
-                    _con.submitForm(context, _formKey, email);
-                  },
-                  child: new Text('Submit'),
-                ),
-              ),
-            ])));
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 1.0),
+                        ),
+                        fillColor: Colors.white,
+                        contentPadding: EdgeInsets.all(5),
+                        labelText: 'Date'),
+                    onChanged: (dt) => setState(() => dateEnd = dt),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: RaisedButton(
+                      padding: const EdgeInsets.all(20.0),
+                      textColor: Colors.white,
+                      color: Colors.blue,
+                      onPressed: () {
+                        if (_con.checkForm(dateStart, dateEnd)) {
+                          _con.submitForm(context, _formKey, email);
+                        } else {
+                          //show error
+                          final snackBar =
+                              new SnackBar(content: new Text("Error"));
+
+                          Scaffold.of(context).showSnackBar(snackBar);
+                        }
+                      },
+                      child: new Text('Submit'),
+                    ),
+                  ),
+                ]))));
   }
 }

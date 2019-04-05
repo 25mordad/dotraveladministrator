@@ -59,18 +59,31 @@ class MainPageState extends StateMVC {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-            new RaisedButton(
+            Text(
+              "Set the hours",
+              style: TextStyle(fontSize: 18.0),
+            ),
+            Ink(
+              decoration: ShapeDecoration(
+                color: Colors.blue,
+                shape: CircleBorder(),
+              ),
+              child: IconButton(
+                icon: Icon(Icons.access_time),
+                color: Colors.white,
+                onPressed: () {
+                  if (_con.settedDate) {
+                    _con.closeDay();
+                  } else {
+                    _con.passToFormDate(context, email);
+                  }
+                },
+              ),
+            ),
+            new Padding(
               padding: const EdgeInsets.all(8.0),
-              textColor: Colors.white,
-              color: Colors.blue,
-              onPressed: () {
-                if (_con.settedDate) {
-                  _con.closeDay();
-                } else {
-                  _con.passToFormDate(context, email);
-                }
-              },
-              child: new Text(_textFromFile == null ? "Add" : _textFromFile),
+              child: Text(_textFromFile == null ? "" : _textFromFile,
+                  style: TextStyle(fontSize: 13.0)),
             ),
           ]))),
       drawer: Drawer(
@@ -82,17 +95,18 @@ class MainPageState extends StateMVC {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: DecoratedBox(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                image: AssetImage('graphics/background.png'),
-                // ...
-              ))),
+              child: Column(children: <Widget>[
+                Text(
+                  email,
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                )
+              ]),
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
             ),
             ListTile(
+              leading: Icon(Icons.access_alarm),
               title: Text('Report'),
               onTap: () {
                 //go to report page

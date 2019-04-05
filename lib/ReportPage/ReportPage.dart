@@ -48,19 +48,43 @@ class ReportPageState extends StateMVC {
             List<Widget> widget = new List();
             widget.add(new Row(
               children: <Widget>[
-                new Text("ID "),
-                new Text(" DATE START "),
-                new Text(" DATE END ")
+                new Card(
+                    child: new Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(_con.formatDataEmpty("ID"),
+                            style: TextStyle(fontSize: 15.0)))),
+                new Card(
+                    child: new Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(_con.formatDataEmpty("DATE START"),
+                            style: TextStyle(fontSize: 15.0)))),
+                new Card(
+                    child: new Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(_con.formatDataEmpty("DATE END"),
+                            style: TextStyle(fontSize: 15.0)))),
               ],
             ));
             for (var row in snapshot.data) {
               widget.add(new Row(children: <Widget>[
-                new Text(_con.formatDataEmpty(row.id)),
-                new Text(_con.formatDataEmpty(row.date_start)),
-                new Text(_con.formatDataEmpty(row.date_end))
+                new Card(
+                    child: new Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(_con.formatDataEmpty(row.id),
+                            style: TextStyle(fontSize: 13.0)))),
+                new Card(
+                    child: new Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(_con.formatDataEmpty(row.date_start),
+                            style: TextStyle(fontSize: 13.0)))),
+                new Card(
+                    child: new Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(_con.formatDataEmpty(row.date_end),
+                            style: TextStyle(fontSize: 13.0)))),
               ]));
             }
-            return new Column(children: widget);
+            return new ListView(children: widget);
           } else {
             //if not show text error
             return new Text("Error");

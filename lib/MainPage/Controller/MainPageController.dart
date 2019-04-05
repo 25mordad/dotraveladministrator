@@ -13,7 +13,7 @@ class MainPageController extends ControllerMVC {
   static MainPageController _this;
   static MainPageModel model;
   bool settedDate = false;
-  String content = "Add";
+  String content = "";
 
   ///Constructor to set up the model
   MainPageController() {
@@ -45,11 +45,11 @@ class MainPageController extends ControllerMVC {
   }
 
   Future<String> getCounter() async {
-    var result = "Add";
+    var result = "";
 
     var dateStart = await Util.getStringFromSharedPreferences("dateStart");
     if (dateStart != null) {
-      var result =
+      result =
           Util.getMinutesBeetweenDates(dateStart, DateTime.now().toString())
               .toString();
     }
@@ -59,8 +59,26 @@ class MainPageController extends ControllerMVC {
   ///method to pass to form date
   passToFormDate(BuildContext context, String email) async {
     //start time go to form included times
-    var resultPageForm = await Util.passToOtherScreen(
-        context, FormDate(title: "Form Date", email: email));
+    var resultPageForm = null;
+    var dateStart = await Util.getStringFromSharedPreferences("dateStart");
+    if (dateStart != null) {
+      var formatDate = Util.getDateFromDateTimeString(dateStart, true);
+
+      resultPageForm = await Util.passToOtherScreen(
+          context,
+          FormDate(
+            title: "Form Date",
+            email: email,
+            dateStart: formatDate,
+          ));
+    } else {
+      resultPageForm = await Util.passToOtherScreen(
+          context,
+          FormDate(
+            title: "Form Date",
+            email: email,
+          ));
+    }
     if (resultPageForm != null) {
       if (resultPageForm == "1") {
         var dateStart = await Util.getStringFromSharedPreferences("dateStart");

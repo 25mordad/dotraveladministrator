@@ -33,24 +33,44 @@ class LoginPageState extends StateMVC {
         ),
         body: new Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              new RaisedButton(
-                child: const Text("Login with google"),
-                color: Colors.black12,
-                elevation: 4.0,
-                splashColor: Colors.lightBlueAccent,
-                onPressed: () {
-                  _con.googleLogin(context, _scaffoldKey);
-                },
+              Text(
+                "Login Google",
+                style: TextStyle(fontSize: 18.0),
               ),
-              new RaisedButton(
-                child: const Text("Login with Scanner"),
-                color: Colors.black12,
-                elevation: 4.0,
-                splashColor: Colors.lightBlueAccent,
-                onPressed: () {
-                  _con.scan();
-                },
+              Ink(
+                padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                decoration: ShapeDecoration(
+                  color: Colors.lightBlueAccent,
+                  shape: CircleBorder(),
+                ),
+                child: IconButton(
+                  icon: Icon(Icons.cloud),
+                  color: Colors.white,
+                  onPressed: () {
+                    _con.googleLogin(context, _scaffoldKey);
+                  },
+                ),
+              ),
+              Text(
+                "Login QRCode",
+                style: TextStyle(fontSize: 18.0),
+              ),
+              Ink(
+                padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                decoration: ShapeDecoration(
+                  color: Colors.blueAccent,
+                  shape: CircleBorder(),
+                ),
+                child: IconButton(
+                  icon: Icon(Icons.camera_alt),
+                  color: Colors.white,
+                  onPressed: () {
+                    _con.scan();
+                  },
+                ),
               ),
             ],
           ),
